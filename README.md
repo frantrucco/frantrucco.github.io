@@ -1,4 +1,4 @@
-# Francisco Trucco
+# Francisco Trucco Dalmas
 
 Hi there! I am a Ph.D. student at the University of Groningen working under the supervision of Helle Hansen and Revantha Ramanayake.
 
