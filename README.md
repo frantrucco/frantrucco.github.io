@@ -6,6 +6,8 @@ I am investigating certain logical properties of modal logics such as Propositio
 
 But this is all very specific. More broadly, I am very passionate about the history of logic, proof theory, complexity theory, the philosophy of mathematics, the practice of mathematics (as in sociology&philosophy), and philosophical logic. But naturally, my knowledge of those fields is quite limited. But I am always happy to learn more about them!
 
+Contact me in:
+
 <aside>
 📬 f.t.trucco.dalmas@rug.nl
 </aside>
