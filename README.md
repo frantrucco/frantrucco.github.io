@@ -10,4 +10,4 @@ But this is all very specific. More broadly, I am very passionate about the hist
 
 You can email me at:
 
-## 📬 f.t.trucco.dalmas@rug.nl
+## 📬 f.c.trucco.dalmas@rug.nl
