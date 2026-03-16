@@ -74,7 +74,7 @@ cv:
 
       - company: DeepvisionAI
         position: ML Engineer
-        location: ""
+        location: "Córdoba, Argentina"
         start_date: 2019-10
         end_date: 2020-02
         summary: Applied machine learning to computer vision problems. Direct interaction with clients.
@@ -85,11 +85,55 @@ cv:
           - "TABLEAUX 2025 Programme Committee"
         date: 2025-01
         awarder: TABLEAUX 2025
-        url: ""
         summary: Awarded for showing that Converse Propositional Dynamic Logic has the Craig's Interpolation Property.
 
-    publications:
-      - bib: true
+    Publications:
+    - title: Interpolation for Converse Propositional Dynamic Logic
+      authors:
+        - Johannes Kloibhofer
+        - Francisco Trucco Dalmas
+        - Yde Venema
+      publisher: Springer
+      releaseDate: 2025
+      url: https://link.springer.com/chapter/10.1007/978-3-032-06085-3_14
+      summary: "We prove that Converse Propositional Dynamic Logic has the Craig Interpolation Property. Using an adaptation of Maehara's proof-theoretic method, we introduce a cyclic sequent system for Converse PDL, featuring an analytic cut rule and a focus mechanism for recognizing successful cycles."
+
+    - title: "Propositional Dynamic Logic has Craig Interpolation: a tableau-based proof"
+      authors:
+        - Mikhail Borzechowski
+        - Malvin Gattinger
+        - Helle Hvid Hansen
+        - Revantha Ramanayake
+        - Francisco Trucco Dalmas
+        - Yde Venema
+      publisher: arXiv
+      releaseDate: 2025
+      url: https://arxiv.org/abs/2503.13276
+      summary: "We prove that Propositional Dynamic Logic has the Craig Interpolation Property using a cyclic tableau system with a loading mechanism to recognize repeats. Our approach adapts Maehara's method to tableaux with repeats, defining pre-interpolants at nodes and interpolants for strongly connected components."
+
+    - title: Mechanizing Bisimulation Theorems for Relation-Changing Logics in Coq
+      authors:
+        - Raul Fervari
+        - Francisco Trucco
+        - Beta Ziliani
+      publisher: "Dynamic Logic: New Trends and Applications (DALI 2019)"
+      releaseDate: 2019
+      url: https://link.springer.com/chapter/10.1007/978-3-030-38808-9_1
+      summary: We mechanize bisimulation theorems for a family of relation-changing modal logics using the Rocq (Coq) proof assistant.
+
+    - title: Modeling Dengue vector population using remotely sensed data and machine learning
+      authors:
+        - Juan M. Scavuzzo
+        - Francisco Trucco
+        - Manuel Espinosa
+        - Carolina B. Tauro
+        - Marcelo Abril
+        - Carlos M. Scavuzzo
+        - Alejandro C. Frery
+      publisher: Acta Tropica
+      releaseDate: 2018
+      url: https://doi.org/10.1016/j.actatropica.2018.05.003
+      summary: Temporal modeling of the oviposition activity of Aedes aegypti in a north Argentinean city using machine learning and remote sensing data, finding that K-nearest neighbor regression outperforms linear approaches.
 
     Skills:
       - name: Formal Methods & Proof Assistants
@@ -112,9 +156,8 @@ cv:
 
     Interests:
       - name: Research
-        icon: fa-solid fa-tag
-        keywords: "Propositional Dynamic Logic, Modal Logic, Proof Theory, Formal Verification, Program Correctness"
-
+        icon: fa-solid fa-microchip
+        keywords: "Formal Methods, Hardware Verification, Cryptographic Protocols, Proof Theory, Non-Classical Logics"
       - name: Personal
         icon: fa-solid fa-heart
         keywords: "Storytelling, Powerlifting, Cooking, Museums, Biking, Travelling, Journalling, Reading (psychology, philosophy, ethics, sci-fi)"
