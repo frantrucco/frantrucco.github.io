@@ -30,7 +30,7 @@ latest_posts:
 ---
 
 I am a formal methods researcher in my last year of my PhD in Computer Science at the University of Groningen.
-During my PhD I have worked on studying Propositional Dynamic Logic.
+The main focus of my PhD has been styding metalogical properties about Propositional Dynamic Logic.
 I contributed to resolving a forty-year-old open problem and earned a Best Student Paper Award at the international conference TABLEAUX 2025.
 I also have some industry experience formally verifying browser security mechanisms at TU Wien and proving compiler correctness at the Max Planck Institute for Security and Privacy for Cryptographic Protocols.
 I am interested in formal analysis techniques to prove correctness of cryptographic protocols, distributed algorithms, and hardware designs.
