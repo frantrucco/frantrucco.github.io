@@ -19,27 +19,18 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 
 announcements:
-  enabled: true # includes a list of news items
+  enabled: false # includes a list of news items
   scrollable: true # adds a vertical scroll bar if there are more than 3 news items
   limit: 5 # leave blank to include all the news in the `_news` folder
 
 latest_posts:
-  enabled: true
+  enabled: false
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
 
-
-Formal methods researcher with a strong background in rigorous mathematical reasoning and formal modeling, specializing in proof theory of logics for reasoning about program correctness via labelled transition systems. Experienced in applying formal methods to real-world, security-critical and complex systems, including model-based testing, formal verification, and the development of domain-specific languages. Has worked in both academy and industry, translating informal system designs into precise formal models and validating them against formal specifications.
-
-I am in the final months of my PhD in Computer Science at the University of Groningen, supervised by Prof. Helle Hvid Hansen and Prof. Revantha Ramanayake. My research focuses on logics for reasoning about program correctness via labelled transition systems. During my PhD I solved a forty-year-old open problem in this area, and my work was recognized with a Best Student Paper Award.
-
-My theoretical foundation covers process algebra, state machines, Petri nets, and labelled transition systems. I have studied and applied modal logics, model checking, and rigorous mathematical reasoning throughout my PhD. During my Master's in Computer Science I used UML to specify and analyze software systems.
-
-At TU Wien I worked as a Research Assistant on model-based testing for finding security bugs in modern browsers, modeling browser protocols using Rocq (Coq), Tamarin, EasyCrypt, and Z3. At the Max Planck Institute for Security and Privacy I worked on the implementation and proof of correctness of a compiler for a domain-specific language for cross-chain smart contracts. Both roles required translating informal system designs into precise formal models and validating them against formal specifications.
-
-As a Machine Learning Engineer at DeepvisionAI I applied computer vision techniques to real-world problems in close interaction with clients, gaining experience with industrial constraints and delivery-oriented engineering.
-
-I have experience facilitating collaboration in diverse settings — serving as an elected student representative at the National University of Córdoba, and organizing seminars and academic events at the University of Groningen. I am motivated to grow into roles that combine technical expertise with responsibility for guiding people and projects.
-
-I am looking to apply my expertise in formal methods and systems modelling in an applied research or industry context, with a long-term ambition toward roles integrating technical leadership with people and project responsibility.
+I am a formal methods researcher in my last year of my PhD in Computer Science at the University of Groningen.
+During my PhD I have worked on studying Propositional Dynamic Logic.
+I contributed to resolving a forty-year-old open problem and earned a Best Student Paper Award at the international conference TABLEAUX 2025.
+I also have some industry experience formally verifying browser security mechanisms at TU Wien and proving compiler correctness at the Max Planck Institute for Security and Privacy for Cryptographic Protocols.
+I am interested in formal analysis techniques to prove correctness of cryptographic protocols, distributed algorithms, and hardware designs.
