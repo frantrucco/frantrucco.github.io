@@ -4,7 +4,7 @@ cv:
   email: franciscoctrucco@gmail.com
   location: Groningen, Netherlands
   image: ""
-  summary: "Formal methods researcher in the final year of my PhD in Computer Science at the University of Groningen, specializing in proof theory for logics that reason about program correctness via labelled transition systems. My doctoral work on Propositional Dynamic Logic contributed to resolving a forty-year-old open problem, recognized with a Best Student Paper Award at TABLEAUX 2025. I am currently transitioning into formal methods for hardware verification. I am broadly interested in formal analysis techniques for establishing correctness of cryptographic protocols and complex hardware designs."
+  summary: "Formal methods researcher in the final year of my PhD in Computer Science at the University of Groningen, specializing in proof theory for logics that reason about program correctness via labelled transition systems. My doctoral work on Propositional Dynamic Logic contributed to resolving a forty-year-old open problem, recognized with a Best Student Paper Award at TABLEAUX 2025. I am broadly interested in formal analysis techniques for establishing correctness of cryptographic protocols and primitives and complex hardware designs."
 
   address:
     street: Nijenborgh 9
