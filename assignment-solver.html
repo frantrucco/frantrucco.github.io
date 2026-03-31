@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment Solver</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f2eb;
+    --surface: #fffef9;
+    --surface2: #f0ece0;
+    --ink: #1a1812;
+    --ink2: #5c5748;
+    --ink3: #9c9486;
+    --accent: #2d5a3d;
+    --accent-light: #d6e8db;
+    --accent2: #8b4513;
+    --accent2-light: #f0ddd0;
+    --warn: #7a4010;
+    --warn-light: #f5e8d8;
+    --border: #d8d2c4;
+    --border-strong: #b0a898;
+    --radius: 6px;
+    --radius-lg: 12px;
+  }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 740px;
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  header p {
+    color: var(--ink2);
+    font-size: 12px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-title {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink3);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  /* Objective selector */
+  .obj-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .obj-btn {
+    padding: 6px 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink2);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .obj-btn:hover { background: var(--surface2); }
+
+  .obj-btn.active {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+
+  /* Items input */
+  .field-label {
+    display: block;
+    font-size: 11px;
+    color: var(--ink3);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 8px 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  input[type="text"]:focus { border-color: var(--border-strong); }
+
+  /* Preference table */
+  .pref-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .pref-table th {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink3);
+    padding: 0 8px 10px 8px;
+    text-align: left;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pref-table td {
+    padding: 6px 8px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pref-table tr:last-child td { border-bottom: none; }
+
+  .person-num {
+    font-size: 11px;
+    color: var(--ink3);
+    white-space: nowrap;
+    width: 70px;
+  }
+
+  .pref-table td input[type="text"] {
+    background: var(--bg);
+    font-size: 12px;
+  }
+
+  /* Controls row */
+  .controls-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 7px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.03em;
+  }
+
+  .btn:hover { background: var(--surface2); }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    font-weight: 500;
+    padding: 9px 24px;
+    font-size: 12px;
+  }
+
+  .btn-primary:hover { background: #234a30; }
+
+  .btn-danger { border-color: #c0a090; color: var(--accent2); }
+  .btn-danger:hover { background: var(--accent2-light); }
+
+  .solve-row {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Error */
+  .error-msg {
+    font-size: 11px;
+    color: var(--warn);
+    background: var(--warn-light);
+    border: 1px solid #d4a880;
+    border-radius: var(--radius);
+    padding: 8px 12px;
+    margin-top: 0.75rem;
+    display: none;
+  }
+
+  /* Result */
+  #result { margin-top: 1.5rem; }
+
+  .result-card {
+    background: var(--surface);
+    border: 1.5px solid var(--accent);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .result-header {
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 18px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .result-body {
+    padding: 0;
+  }
+
+  .result-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+
+  .result-row:last-child { border-bottom: none; }
+  .result-row:hover { background: var(--surface2); }
+
+  .result-person {
+    font-size: 11px;
+    color: var(--ink3);
+  }
+
+  .result-item {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--ink);
+  }
+
+  .rank-pill {
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .rank-1 { background: var(--accent-light); color: var(--accent); }
+  .rank-2 { background: #ddeaf5; color: #1a4a7a; }
+  .rank-3 { background: var(--warn-light); color: var(--warn); }
+  .rank-other { background: var(--surface2); color: var(--ink2); border: 1px solid var(--border); }
+
+  /* Stats */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-top: 1px solid var(--border);
+    margin-top: 0;
+  }
+
+  .stat {
+    background: var(--surface);
+    padding: 14px 18px;
+    text-align: center;
+  }
+
+  .stat-val {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-lbl {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink3);
+  }
+
+  /* Preference mini-table in results */
+  .pref-breakdown {
+    padding: 16px 18px;
+    border-top: 1px solid var(--border);
+  }
+
+  .pref-breakdown-title {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink3);
+    margin-bottom: 10px;
+  }
+
+  .pref-mini-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+  }
+
+  .pref-mini-table th {
+    color: var(--ink3);
+    font-weight: 500;
+    padding: 4px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .pref-mini-table td {
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink2);
+  }
+
+  .pref-mini-table tr:last-child td { border-bottom: none; }
+  .pref-mini-table .assigned { color: var(--accent); font-weight: 500; }
+
+  footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--ink3);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Assignment <em>Solver</em></h1>
+    <p>Enter preference rankings &mdash; get the optimal one-to-one assignment</p>
+  </header>
+
+  <!-- Objective -->
+  <div class="card">
+    <div class="card-title">Objective</div>
+    <div class="obj-group">
+      <button class="obj-btn active" data-obj="lex" onclick="setObj('lex', this)">
+        lexicographic &mdash; max #1s, then #2s&hellip;
+      </button>
+      <button class="obj-btn" data-obj="sum" onclick="setObj('sum', this)">
+        minimize sum of ranks
+      </button>
+      <button class="obj-btn" data-obj="max" onclick="setObj('max', this)">
+        minimize worst rank
+      </button>
+    </div>
+  </div>
+
+  <!-- Items -->
+  <div class="card">
+    <div class="card-title">Items</div>
+    <label class="field-label" for="item-names">Names (comma-separated) &mdash; leave blank to use numbers</label>
+    <input type="text" id="item-names" placeholder="e.g. Paris, London, Rome, Berlin" oninput="onItemsChange()" />
+  </div>
+
+  <!-- Preferences -->
+  <div class="card">
+    <div class="card-title">Preferences</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:1rem;">
+      For each person, enter their ranking as a comma-separated list of item names or numbers (1 = most preferred).
+    </p>
+    <table class="pref-table">
+      <thead>
+        <tr>
+          <th>Person</th>
+          <th>Ranking (most → least preferred)</th>
+        </tr>
+      </thead>
+      <tbody id="pref-body"></tbody>
+    </table>
+    <div class="controls-row">
+      <button class="btn" onclick="addPerson()">+ add person</button>
+      <button class="btn btn-danger" onclick="removePerson()">&minus; remove</button>
+    </div>
+  </div>
+
+  <div class="solve-row">
+    <button class="btn btn-primary" onclick="solve()">Compute assignment &rarr;</button>
+  </div>
+
+  <div class="error-msg" id="error-msg"></div>
+
+  <div id="result"></div>
+
+  <footer>
+    Exact solver via brute-force enumeration &mdash; works up to 8 people/items.
+    For larger instances, use the Hungarian algorithm or linear programming.
+  </footer>
+
+</div>
+
+<script>
+  let objective = 'lex';
+  let numPeople = 3;
+
+  function setObj(o, btn) {
+    objective = o;
+    document.querySelectorAll('.obj-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function getItems() {
+    const raw = document.getElementById('item-names').value.trim();
+    if (!raw) return [];
+    return raw.split(',').map(s => s.trim()).filter(Boolean);
+  }
+
+  function numItems() {
+    const items = getItems();
+    return items.length > 0 ? items.length : numPeople;
+  }
+
+  function getItemLabel(i) {
+    const items = getItems();
+    return items[i] !== undefined ? items[i] : String(i + 1);
+  }
+
+  function onItemsChange() {
+    renderRows();
+  }
+
+  function renderRows() {
+    const n = numItems();
+    const body = document.getElementById('pref-body');
+    const existing = Array.from(body.querySelectorAll('input')).map(el => el.value);
+    body.innerHTML = '';
+    for (let i = 0; i < numPeople; i++) {
+      const items = getItems();
+      const placeholder = Array.from({length: n}, (_, k) => getItemLabel(k)).join(', ');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="person-num">person ${i + 1}</td>
+        <td>
+          <input type="text" id="pref-${i}" placeholder="${placeholder}" value="${existing[i] || ''}" />
+        </td>
+      `;
+      body.appendChild(tr);
+    }
+  }
+
+  function addPerson() {
+    if (numPeople >= 8) { showError('Maximum 8 people for exact solution.'); return; }
+    numPeople++;
+    renderRows();
+  }
+
+  function removePerson() {
+    if (numPeople <= 2) return;
+    numPeople--;
+    renderRows();
+  }
+
+  function parsePrefs() {
+    const items = getItems();
+    const n = numItems();
+    if (numPeople !== n) return null;
+    const prefs = [];
+    for (let i = 0; i < numPeople; i++) {
+      const raw = document.getElementById('pref-' + i).value.trim();
+      if (!raw) return null;
+      const parts = raw.split(',').map(s => s.trim()).filter(Boolean);
+      const row = [];
+      for (const p of parts) {
+        let idx = -1;
+        if (items.length > 0) {
+          idx = items.findIndex(it => it.toLowerCase() === p.toLowerCase());
+          if (idx === -1) {
+            const num = parseInt(p) - 1;
+            if (!isNaN(num) && num >= 0 && num < n) idx = num;
+          }
+        } else {
+          const num = parseInt(p) - 1;
+          if (!isNaN(num) && num >= 0 && num < n) idx = num;
+        }
+        if (idx === -1 || row.includes(idx)) return null;
+        row.push(idx);
+      }
+      if (row.length !== n) return null;
+      prefs.push(row);
+    }
+    return prefs;
+  }
+
+  function permutations(arr) {
+    if (arr.length <= 1) return [arr.slice()];
+    const result = [];
+    for (let i = 0; i < arr.length; i++) {
+      const rest = arr.filter((_, j) => j !== i);
+      for (const p of permutations(rest)) result.push([arr[i], ...p]);
+    }
+    return result;
+  }
+
+  function scoreAssignment(assignment, prefs) {
+    const n = prefs.length;
+    const ranks = assignment.map((item, person) => prefs[person].indexOf(item) + 1);
+    if (objective === 'sum') return { primary: ranks.reduce((a, b) => a + b, 0), ranks };
+    if (objective === 'max') return { primary: Math.max(...ranks), ranks };
+    if (objective === 'lex') {
+      const freq = new Array(n + 1).fill(0);
+      ranks.forEach(r => freq[r]++);
+      let score = 0;
+      for (let r = 1; r <= n; r++) score += freq[r] * Math.pow(n + 1, n - r);
+      return { primary: -score, ranks };
+    }
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('error-msg');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  function hideError() {
+    document.getElementById('error-msg').style.display = 'none';
+  }
+
+  function solve() {
+    hideError();
+    document.getElementById('result').innerHTML = '';
+
+    const n = numItems();
+
+    if (numPeople !== n) {
+      showError('Number of people (' + numPeople + ') must equal number of items (' + n + ').');
+      return;
+    }
+
+    if (n > 8) {
+      showError('Maximum 8 items for exact solution.');
+      return;
+    }
+
+    const prefs = parsePrefs();
+    if (!prefs) {
+      showError('Check your inputs. Each person needs a complete ranking of all ' + n + ' items, with no duplicates.');
+      return;
+    }
+
+    const items = Array.from({length: n}, (_, i) => i);
+    const perms = permutations(items);
+
+    let best = null, bestScore = null, bestRanks = null;
+    for (const perm of perms) {
+      const { primary, ranks } = scoreAssignment(perm, prefs);
+      if (bestScore === null || primary < bestScore) {
+        bestScore = primary;
+        best = perm;
+        bestRanks = ranks;
+      }
+    }
+
+    renderResult(best, bestRanks, prefs);
+  }
+
+  function renderResult(assignment, ranks, prefs) {
+    const n = prefs.length;
+    const firstChoices = ranks.filter(r => r === 1).length;
+    const sumRanks = ranks.reduce((a, b) => a + b, 0);
+    const maxRank = Math.max(...ranks);
+
+    const rankSuffix = r => r === 1 ? '1st' : r === 2 ? '2nd' : r === 3 ? '3rd' : r + 'th';
+    const rankClass = r => r === 1 ? 'rank-1' : r === 2 ? 'rank-2' : r === 3 ? 'rank-3' : 'rank-other';
+
+    let assignmentRows = '';
+    assignment.forEach((item, person) => {
+      const r = ranks[person];
+      assignmentRows += `
+        <div class="result-row">
+          <span class="result-person">person ${person + 1}</span>
+          <span class="result-item">${getItemLabel(item)}</span>
+          <span class="rank-pill ${rankClass(r)}">${rankSuffix(r)} choice</span>
+        </div>
+      `;
+    });
+
+    let miniTableRows = '';
+    prefs.forEach((row, pi) => {
+      const cells = row.map((item, ci) => {
+        const isAssigned = assignment[pi] === item;
+        return `<td class="${isAssigned ? 'assigned' : ''}">${getItemLabel(item)}${isAssigned ? ' ←' : ''}</td>`;
+      }).join('');
+      miniTableRows += `<tr><td style="color:var(--ink3)">person ${pi + 1}</td>${cells}</tr>`;
+    });
+
+    let choiceCols = '';
+    for (let k = 0; k < n; k++) choiceCols += `<th>choice ${k + 1}</th>`;
+
+    const html = `
+      <div class="result-card">
+        <div class="result-header">
+          <span>Optimal assignment</span>
+          <span>${objective === 'lex' ? 'lexicographic' : objective === 'sum' ? 'min sum' : 'min worst rank'}</span>
+        </div>
+        <div class="result-body">
+          ${assignmentRows}
+        </div>
+        <div class="stats-row">
+          <div class="stat">
+            <div class="stat-val">${firstChoices}</div>
+            <div class="stat-lbl">1st choices</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">${sumRanks}</div>
+            <div class="stat-lbl">sum of ranks</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">${maxRank}</div>
+            <div class="stat-lbl">worst rank</div>
+          </div>
+        </div>
+        <div class="pref-breakdown">
+          <div class="pref-breakdown-title">Preference table</div>
+          <table class="pref-mini-table">
+            <thead><tr><th>person</th>${choiceCols}</tr></thead>
+            <tbody>${miniTableRows}</tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('result').innerHTML = html;
+    document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Init
+  renderRows();
+</script>
+</body>
+</html>
