@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-05-11'
+  last_updated: '2026-06-03'
 papers:
   gtzZY0IAAAAJ:2osOgNQ5qMEC:
     citations: 10
@@ -18,7 +18,7 @@ papers:
     title: Mechanizing bisimulation theorems for relation-changing logics in Coq
     year: '2019'
   gtzZY0IAAAAJ:qjMakFHDy7sC:
-    citations: 6
+    citations: 7
     title: Interpolation for converse PDL
     year: '2025'
   gtzZY0IAAAAJ:u-x6o8ySG0sC:
