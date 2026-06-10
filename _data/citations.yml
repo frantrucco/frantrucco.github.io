@@ -1,12 +1,12 @@
 metadata:
-  last_updated: '2026-06-03'
+  last_updated: '2026-06-10'
 papers:
   gtzZY0IAAAAJ:2osOgNQ5qMEC:
     citations: 10
     title: Modeling the temporal pattern of Dengue, Chicungunya and Zika vector using satellite data and neural networks
     year: '2017'
   gtzZY0IAAAAJ:9yKSN-GCB0IC:
-    citations: 136
+    citations: 137
     title: Modeling Dengue vector population using remotely sensed data and machine learning
     year: '2018'
   gtzZY0IAAAAJ:UeHWp8X0CEIC:
